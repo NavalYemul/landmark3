@@ -2,7 +2,7 @@
 # MAGIC %run /Workspace/Users/navallyemul@gmail.com/batch3/Day2/includes
 
 # COMMAND ----------
-
+finialised
 # MAGIC %md
 # MAGIC ### Step1
 
