@@ -1,10 +1,10 @@
 # Databricks notebook source
-# MAGIC %run /Workspace/Users/navallyemul@gmail.com/batch3/Day2/includes
+dbutils.widgets.text("environment"," ")
+v=dbutils.widgets.get("environment")
 
 # COMMAND ----------
-finialised
-# MAGIC %md
-# MAGIC ### Step1
+
+# MAGIC %run /Workspace/Users/navallyemul@gmail.com/batch3/Day2/includes
 
 # COMMAND ----------
 
@@ -16,7 +16,7 @@ df=spark.table("naval.superstore_bronze")
 
 # COMMAND ----------
 
-df1=df.dropDuplicates().dropna()
+df1=df.dropDuplicates().dropna().withColumn("environment",lit(v))
 
 # COMMAND ----------
 
@@ -27,3 +27,8 @@ df1.write.option('delta.columnMapping.mode','name').mode("overwrite").saveAsTabl
 # MAGIC %sql
 # MAGIC create or replace table naval.superstore_gold as 
 # MAGIC select segment, sum(sales) as totalsales from naval.superstore_silver group by segment
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC select * from naval.superstore_silver
