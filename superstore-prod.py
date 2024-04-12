@@ -3,6 +3,11 @@
 
 # COMMAND ----------
 
+# MAGIC %md
+# MAGIC ### Step1
+
+# COMMAND ----------
+
 (spark.read.csv(f"{input_path}/super_store1.csv",header=True,inferSchema=True).write.option('delta.columnMapping.mode','name').mode("overwrite").saveAsTable("naval.superstore_bronze"))
 
 # COMMAND ----------
@@ -22,12 +27,3 @@ df1.write.option('delta.columnMapping.mode','name').mode("overwrite").saveAsTabl
 # MAGIC %sql
 # MAGIC create or replace table naval.superstore_gold as 
 # MAGIC select segment, sum(sales) as totalsales from naval.superstore_silver group by segment
-
-# COMMAND ----------
-
-# MAGIC %sql
-# MAGIC select * from naval.superstore_gold
-
-# COMMAND ----------
-
-
